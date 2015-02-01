@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="todolist">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+
+
+    <script src="../bower_components/angular/angular.js"></script>
+
+    <script src="todo-list.mdl.js"></script>
+
+    <!--Singletons first:-->
+    <!--services-->
+    <script src="items.srv.js"></script>
+
+    <!--controllers-->
+    <script src="todo-list.ctrl.js"></script>
+
+    <!--<script src="logger.js"></script>-->
+
+</head>
+<body class="container">
+
+    <h1 class="page-header">Todo list</h1>
+
+    <div ng-controller="ListController as list">
+
+        <input type="text"
+               placeholder="item title..."
+               ng-model="list.item.title"/>
+
+        <textarea name="" id=""
+                  ng-model="list.item.description"></textarea>
+
+
+        <button class="btn btn-primary"
+                ng-click="list.addItem(list.item)">Click</button>
+
+        <p></p>
+
+        <ul class="list-group">
+            <li class="list-group-item"
+                ng-repeat="item in list.items"
+                ng-class="list.getItemStyle(item)"    >
+
+                <input ng-model="item.selected"
+                       type="checkbox"/>
+
+
+                <h5 ng-click="list.toggleDesc()">{{ item.title }}</h5>
+                <p ng-show="list.item.showDesc">{{ item.description }}</p>
+
+
+                <button class="btn btn-danger btn-sm "
+                        ng-click="list.removeItem(item)"
+                        >x</button>
+            </li>
+            <!--ng-class="{'active': selected, 'text-danger': !selected}"-->
+            <!--ng-change="list.markAsCompleted(item)"-->
+        </ul>
+
+        <div ng-switch="someVal">
+            <div ng-switch-when="1">ONE</div>
+            <div ng-switch-default>DEFAULT</div>
+        </div>
+
+        <div ng-switch={{value}}>
+            <div ng-switch-when="1">ONE</div>
+            <div ng-switch-default>DEFAULT</div>
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+<!--<div ng-controller="Logger as logger">-->
+<!--<ul>-->
+<!--<li ng-repeat="record in logger.logs">{{ record }}</li>-->
+<!--</ul>-->
+<!--</div>-->
+
+
